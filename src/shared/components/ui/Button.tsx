@@ -1,3 +1,4 @@
+import { Button as MantineButton } from '@mantine/core'
 import type { ButtonHTMLAttributes } from 'react'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -6,19 +7,20 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({
   children,
-  className = '',
-  disabled,
+  className,
   isLoading = false,
   ...props
 }: ButtonProps) {
   return (
-    <button
-      className={`inline-flex w-full items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60 ${className}`}
-      disabled={disabled || isLoading}
+    <MantineButton
+      className={className}
+      fullWidth
+      loading={isLoading}
       type="button"
+      variant="filled"
       {...props}
     >
-      {isLoading ? 'Please wait...' : children}
-    </button>
+      {children}
+    </MantineButton>
   )
 }
