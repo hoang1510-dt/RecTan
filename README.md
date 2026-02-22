@@ -27,6 +27,19 @@ VITE_AUTH_STORAGE_KEY=rectan.auth
 
 All variables are validated in `src/lib/env/env.ts` with Zod at startup.
 
+## CI/CD (GitHub Actions)
+
+Pipeline file: `.github/workflows/ci-cd.yml`
+
+- **CI (PR + main push):** install, lint, and build.
+- **CD (main push):** deploys `dist` to GitHub Pages.
+
+### One-time GitHub setup
+
+1. In repository **Settings -> Pages**, set **Source** to **GitHub Actions**.
+2. Add repository secret `VITE_API_BASE_URL` with your production API URL.
+3. Push to `main` to trigger deployment.
+
 ## Folder Explanation
 
 - `src/app` - application wiring: providers, router, and global styles.
