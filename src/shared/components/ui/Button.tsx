@@ -3,12 +3,14 @@ import type { ButtonHTMLAttributes } from 'react'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   isLoading?: boolean
+  variant?: 'filled' | 'light' | 'outline' | 'default' | 'subtle' | 'gradient'
 }
 
 export function Button({
   children,
   className,
   isLoading = false,
+  variant = 'filled',
   ...props
 }: ButtonProps) {
   return (
@@ -17,7 +19,7 @@ export function Button({
       fullWidth
       loading={isLoading}
       type="button"
-      variant="filled"
+      variant={variant}
       {...props}
     >
       {children}

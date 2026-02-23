@@ -5,6 +5,7 @@ import { FormError } from '../../../shared/components/ui/FormError'
 import { Input } from '../../../shared/components/ui/Input'
 import { useLoginMutation } from '../hooks/useLoginMutation'
 import { loginPayloadSchema } from '../schemas/auth.schema'
+import { SocialLoginButtons } from './SocialLoginButtons'
 
 type LoginFormProps = {
   onSuccess?: () => void
@@ -39,29 +40,37 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   }
 
   return (
-    <form className="space-y-4" onSubmit={(event) => void handleSubmit(event)}>
-      <Input
-        autoComplete="email"
-        error={fieldErrors.email}
-        label="Email"
-        onChange={(event) => setEmail(event.target.value)}
-        placeholder="you@company.com"
-        type="email"
-        value={email}
-      />
-      <Input
-        autoComplete="current-password"
-        error={fieldErrors.password}
-        label="Password"
-        onChange={(event) => setPassword(event.target.value)}
-        placeholder="********"
-        type="password"
-        value={password}
-      />
-      <FormError message={(loginMutation.error as ApiError | null)?.message} />
-      <Button isLoading={loginMutation.isPending} type="submit">
-        Login
-      </Button>
-    </form>
+    <div className="space-y-6">
+      <form
+        className="space-y-4"
+        onSubmit={(event) => void handleSubmit(event)}
+      >
+        <Input
+          autoComplete="email"
+          error={fieldErrors.email}
+          label="Email"
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="you@company.com"
+          type="email"
+          value={email}
+        />
+        <Input
+          autoComplete="current-password"
+          error={fieldErrors.password}
+          label="Password"
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="********"
+          type="password"
+          value={password}
+        />
+        <FormError
+          message={(loginMutation.error as ApiError | null)?.message}
+        />
+        <Button isLoading={loginMutation.isPending} type="submit">
+          Login
+        </Button>
+      </form>
+      <SocialLoginButtons onSuccess={onSuccess} />
+    </div>
   )
 }

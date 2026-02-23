@@ -1,9 +1,10 @@
 import { defineConfig } from 'orval'
+import { env } from './src/lib/env/env'
 
 export default defineConfig({
   api: {
     input: {
-      target: 'https://localhost:7072/swagger/v1/swagger.json',
+      target: env.VITE_API_BASE_URL + '/swagger/v1/swagger.json' as string,
     },
     output: {
       mode: 'split',

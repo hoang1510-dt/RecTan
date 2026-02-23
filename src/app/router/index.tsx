@@ -7,6 +7,7 @@ import {
   createRouter,
   redirect,
 } from '@tanstack/react-router'
+import { AuthCallbackPage } from '../../features/auth/pages/AuthCallbackPage'
 import { LoginPage } from '../../features/auth/pages/LoginPage'
 import { authStorage } from '../../lib/utils/storage'
 import { AppShell } from '../../shared/components/layout/AppShell'
@@ -75,6 +76,12 @@ const loginRoute = createRoute({
   component: LoginPage,
 })
 
+const authCallbackRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: ROUTES.authCallback,
+  component: AuthCallbackPage,
+})
+
 const authenticatedRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: '_authenticated',
@@ -91,6 +98,7 @@ const dashboardRoute = createRoute({
 export const routeTree = rootRoute.addChildren([
   homeRoute,
   loginRoute,
+  authCallbackRoute,
   authenticatedRoute.addChildren([dashboardRoute]),
 ])
 
